@@ -35,6 +35,7 @@ import Spinner from "./Spinner";
 // };
 
 const imageMaxSize = 100000; // Maximum file size (in bytes)
+const acceptedTypes = ["image/jpeg", "image/png"];
 
 const ImgDrop = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -42,13 +43,15 @@ const ImgDrop = () => {
   const [isRejected, setIsRejected] = useState(false);
   const [isToBig, setisToBig] = useState(false);
 
+  const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+
   const handleDrop = useCallback((acceptedFiles, rejectedFiles) => {
     //validation to send only img files
     //call function to upload image
     // spinner indicating uploading
     if (acceptedFiles.length > 0) {
-      setIsLoading(true);
       console.log("Acepted", acceptedFiles);
+      setIsLoading(true);
       //
       //const req = request.post('/upload')
       // acceptedFiles.forEach(file => {
@@ -57,8 +60,6 @@ const ImgDrop = () => {
       //
       //
       //after image is uploaded display success icon for 5 seconds (get response from api)
-
-      const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
       wait(5000)
         .then(() => {
@@ -75,18 +76,23 @@ const ImgDrop = () => {
       const rejectedFile = rejectedFiles[0];
       const rejectedFileType = rejectedFile.type;
       const rejectedFileSize = rejectedFile.size;
-      if (rejectedFileSize > imageMaxSize) {
-        setisToBig(true);
-        setTimeout(() => {
-          setisToBig(false);
-        }, 3000);
-        // return;
-      }
+      console.log(rejectedFileType);
+
+      acceptedTypes.forEach(type => {
+        if (rejectedFileType === type) {
+          setisToBig(true);
+          setTimeout(() => {
+            setisToBig(false);
+          }, 5000);
+          return;
+        }
+      });
+
       setIsRejected(true);
       setTimeout(() => {
         setIsRejected(false);
       }, 3000);
-      console.log("Rejected", rejectedFiles);
+      // console.log("Rejected", rejectedFiles);
     }
 
     // if error display error message
@@ -99,7 +105,7 @@ const ImgDrop = () => {
     isDragAccept,
     isDragReject
   } = useDropzone({
-    accept: "image/*",
+    accept: acceptedTypes,
     multiple: false,
     maxSize: imageMaxSize,
     noDragEventsBubbling: true,
@@ -129,7 +135,10 @@ const ImgDrop = () => {
         <input {...getInputProps()} />
 
         {!isLoading && !success && !isRejected && !isDragReject && !isToBig ? (
-          <p>Drag 'n' drop some files here, or click to select files</p>
+          <div className="message">
+            <p>Drag 'n' drop some files here, or click to select files</p>
+            <em>(Only *.jpeg and *.png images will be accepted)</em>
+          </div>
         ) : (
           ""
         )}

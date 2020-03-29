@@ -2,6 +2,8 @@ import React from "react";
 import ImgTile from "./ImgTile";
 
 const ImgList = () => {
+  //get ImageList from global state
+
   return (
     <div className="ImgList">
       <ImgTile imgSrc="https://source.unsplash.com/KXkgOigCqj0" />
