@@ -1,0 +1,52 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+.dropzone {
+  z-index: -10;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  justify-items: center;
+  padding: 3rem;
+  width: 300px;
+  height: 300px;
+  // mediaquery for small sizes
+  margin: 5rem auto;
+  border: 5px dashed purple;
+  &.active {
+    border-color: darkblue;
+  }
+  &.accept {
+    border-color: yellowgreen;
+  }
+  &.reject {
+    border-color: red;
+  }
+}
+
+.ImgTile {
+  margin: 1rem 1rem;
+  img {
+    // mediaquery for small sizes
+    border: 2px solid purple;
+    width: 90px;
+  }
+  .palceholder {
+    border: 2px solid purple;
+    width: 90px;
+    height: 60px;
+  }
+}
+
+.ImgList {
+  //use grid mixin
+  display: flex;
+  justify-content: center;
+  margin: 1rem auto;
+}
+
+// .dropzone:hover {
+//   border: 2px solid purple;
+// }
