@@ -34,7 +34,7 @@ import Spinner from "./Spinner";
 //   borderColor: "#ff1744"
 // };
 
-const imageMaxSize = 100000; // Maximum file size (in bytes)
+const imageMaxSize = 100000000; // Maximum file size (in bytes)
 const acceptedTypes = ["image/jpeg", "image/png"];
 
 const ImgDrop = () => {
@@ -136,8 +136,8 @@ const ImgDrop = () => {
 
         {!isLoading && !success && !isRejected && !isDragReject && !isToBig ? (
           <div className="message">
-            <p>Drag 'n' drop some files here, or click to select files</p>
-            <em>(Only *.jpeg and *.png images will be accepted)</em>
+            <p>Drag your image to upload, or click to select files</p>
+            <em>(File type must be *.jpeg, *jpeg or *.png)</em>
           </div>
         ) : (
           ""

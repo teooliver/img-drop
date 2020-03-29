@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 .dropzone {
-  z-index: -10;
+  // z-index: -10;
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;
@@ -13,7 +13,7 @@
   width: 300px;
   height: 300px;
   // mediaquery for small sizes
-  margin: 5rem auto;
+  margin: 1rem auto;
   border: 5px dashed purple;
   &.active {
     border-color: darkblue;
@@ -24,14 +24,20 @@
   &.reject {
     border-color: red;
   }
+  p {
+    margin: 0;
+    padding: 0;
+  }
 }
 
 .ImgTile {
   margin: 1rem 1rem;
+
   img {
-    // mediaquery for small sizes
     border: 2px solid purple;
+    // mediaquery for small sizes
     width: 90px;
+    padding: 0;
   }
   .palceholder {
     border: 2px solid purple;
@@ -50,3 +56,15 @@
 // .dropzone:hover {
 //   border: 2px solid purple;
 // }
+
+.QuestionHeader {
+  h1 {
+    font-size: 2rem;
+    margin: 1rem;
+    padding: 0;
+  }
+  p {
+    margin: 0;
+    padding: 0;
+  }
+}
